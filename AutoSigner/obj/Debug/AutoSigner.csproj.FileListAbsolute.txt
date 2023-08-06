@@ -1,0 +1,13 @@
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.csproj.AssemblyReference.cache
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.csproj.CoreCompileInputs.cache
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\selenium-manager\linux\selenium-manager
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\selenium-manager\macos\selenium-manager
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\selenium-manager\windows\selenium-manager.exe
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\AutoSigner.exe.config
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\AutoSigner.exe
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\AutoSigner.pdb
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\WebDriver.dll
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.csproj.CopyComplete
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.exe
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.pdb
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\SeleniumExtras.WaitHelpers.dll
