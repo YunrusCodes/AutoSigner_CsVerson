@@ -1,0 +1,2 @@
+1.先在AutoSigner_CsVerson-main\AutoSigner\bin\Debug\credentials.txt寫入帳號密碼(第一行寫帳號，第二行寫密碼)
+2.點擊AutoSigner_CsVerson-main\AutoSigner\bin\Debug\AutoSigner.exe，或打開AutoSigner_CsVerson-main\AutoSigner.sln執行腳本
