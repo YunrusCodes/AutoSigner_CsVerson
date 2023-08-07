@@ -10,6 +10,15 @@ namespace SeleniumCSharpExample
     {
         static void Main(string[] args)
         {
+            string action = ""
+            if (args.Length > 0 && args[0] == "簽退")
+            {
+                action = "SignOut_";
+            }
+            else if (args.Length > 0 && args[0] == "簽到")
+            {
+                action = "SignIn_";
+            }
             // 從文本文件中讀取_id和_pw變量的值
             string dir_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             using (StreamReader f = new StreamReader(Path.Combine(dir_path, "credentials.txt")))
@@ -40,7 +49,7 @@ namespace SeleniumCSharpExample
                 driver.Navigate().GoToUrl("https://imo.3t.org.tw/FActive/Index/2756");
 
                 // 找到所有ID包含"SignIn_"的<a>元素
-                var sign_in_links = driver.FindElements(By.XPath("//a[contains(@id, 'SignIn_')]"));
+                var sign_in_links = driver.FindElements(By.XPath($"//a[contains(@id, '{action}')]"));
 
                 // 嘗試點擊第一個找到的<a>元素
                 if (sign_in_links.Count > 0)
