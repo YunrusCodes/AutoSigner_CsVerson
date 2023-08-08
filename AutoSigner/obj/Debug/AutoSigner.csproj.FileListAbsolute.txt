@@ -10,3 +10,4 @@ C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.csproj.Cop
 C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.exe
 C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.pdb
 C:\Users\Asus\source\repos\AutoSigner\AutoSigner\bin\Debug\SeleniumExtras.WaitHelpers.dll
+C:\Users\Asus\source\repos\AutoSigner\AutoSigner\obj\Debug\AutoSigner.csproj.AssemblyReference.cache
