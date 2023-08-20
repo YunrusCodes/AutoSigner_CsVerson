@@ -1,15 +1,51 @@
-﻿using OpenQA.Selenium;
+﻿using System;
+using System.Threading.Tasks;
+using System.IO;
+using Discord;
+using Discord.WebSocket;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.UI;
-using System;
-using System.IO;
+using System.Runtime.Remoting.Channels;
+using System.Security.Cryptography;
 
 namespace SeleniumCSharpExample
 {
     class Program
     {
-        static void Main(string[] args)
+        // 定義機器人的 Token
+        private const string BotToken = "MTE0MjQ2NjczNjc3NjU1MjYyNA.Giun5c.xUNMIEX1OjQDb2_DU4aEb8AUXl2DfUaBR0qYlA";
+
+        // 定義要發送訊息的頻道 ID
+        private const ulong ChannelId = 1125363520066830339;
+
+        // 定義失敗訊息的格式
+        private const string FailureMessageFormat = "操作失敗: {0}\n錯誤原因: {1}";
+
+        static async Task Main(string[] args)
         {
+            // 建立一個 DiscordSocketClient 物件，用來連接和操作 DC 伺服器
+            var client = new DiscordSocketClient();
+
+            // 註冊一個事件處理器，當機器人成功連接時會被呼叫
+            client.Connected += async () =>
+            {
+                // 取得指定的文字頻道物件
+                var channel = client.GetChannel(ChannelId) as IMessageChannel;
+
+                // 如果頻道不存在，就發送不存在的訊息
+                if (channel == null)
+                {
+                    Console.WriteLine("The channel does not exist.");
+                }
+            };
+
+            // 使用 Token 來登入機器人帳號
+            await client.LoginAsync(TokenType.Bot, BotToken);
+
+            // 開始連接 DC 伺服器
+            await client.StartAsync();
+
             // 從文本文件中讀取_id和_pw變量的值
             string dir_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             using (StreamReader f = new StreamReader(Path.Combine(dir_path, "credentials.txt")))
@@ -18,13 +54,11 @@ namespace SeleniumCSharpExample
                 {
                     string _id = f.ReadLine()?.Trim();
                     string _pw = f.ReadLine()?.Trim();
-                    Console.Out.WriteLine(_id);
-                    Console.Out.WriteLine(_pw);
                     if (_id == null || _pw == null) break;
+                    // 初始化Bing瀏覽器驅動程序
+                    IWebDriver driver = new EdgeDriver();
                     try
                     {
-                        // 初始化Bing瀏覽器驅動程序
-                        IWebDriver driver = new EdgeDriver();
                         // 訪問網站
                         driver.Navigate().GoToUrl("https://imo.3t.org.tw/");
                         WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
@@ -51,7 +85,7 @@ namespace SeleniumCSharpExample
                         Console.Out.WriteLine($"action: {action}");
                         var sign_in_links = driver.FindElements(By.XPath($"//a[contains(@id, '{action}')]"));
 
-
+                        string now = "";
                         // 嘗試點擊第一個找到的<a>元素
                         if (sign_in_links.Count > 0)
                         {
@@ -61,25 +95,51 @@ namespace SeleniumCSharpExample
 
                             // 點擊確定按鈕
                             confirm_button.Click();
+                            // 取得指定的文字頻道物件
+                            now = "(" + DateTime.Now + ") ";
+                            var channel2 = client.GetChannel(ChannelId) as IMessageChannel;
+                            await channel2.SendMessageAsync(now + _id + " " + args[0] + "成功");
                         }
                         else
                         {
                             Console.WriteLine("沒有找到符合條件的<a>元素");
-                        }
 
+                            // 發佈到DC
+                            now = "(" + DateTime.Now + ") ";
+                            var channel1 = client.GetChannel(ChannelId) as IMessageChannel;
+                            await channel1.SendMessageAsync( now  + _id + " " + args[0] + "失敗:"+ "\n詳細資訊 -->" + "沒有找到符合條件的<a>元素");
+                        }
                         driver.Quit();  // 結束瀏覽器
                     }
                     catch (Exception e)
                     {
-                        Console.Out.WriteLine("操作失敗:" + _id);
+                        Console.Out.WriteLine(_id + " " + "操作失敗:");
                         Console.Out.WriteLine("-->" + e);
+
+                        // 如果頻道存在，就發送失敗訊息
+                        var channel3 = client.GetChannel(ChannelId) as IMessageChannel;
+                        if (channel3 != null)
+                        {
+                            // 發送失敗訊息
+                            string now = "(" + DateTime.Now + ") ";
+                            await channel3.SendMessageAsync( now + _id + "操作失敗"  + "\n詳細資訊 -->" + e);
+                        }
+                        else
+                        {
+                            Console.WriteLine("The channel does not exist.");
+                        }
+                        driver.Quit();  // 結束瀏覽器
                     }
                 }
+
 
             }
             Console.Out.WriteLine("程序結束");
             Console.Out.WriteLine("輸入任意鍵離開");
             Console.ReadLine();
+
+            // 關閉機器人連線
+            await client.StopAsync();
         }
     }
 }

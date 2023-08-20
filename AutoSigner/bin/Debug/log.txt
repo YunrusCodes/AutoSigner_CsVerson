@@ -1,0 +1,8 @@
+1124S2211: 操作失敗 --> System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 SeleniumCSharpExample.Program.<Main>d__2.MoveNext() 於 C:\Users\Asus\source\repos\AutoSigner\AutoSigner\Program.cs: 行 87
+1124S2211: 操作失敗 --> System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 SeleniumCSharpExample.Program.<Main>d__2.MoveNext() 於 C:\Users\Asus\source\repos\AutoSigner\AutoSigner\Program.cs: 行 87
+1124S2211: 操作失敗 --> System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 SeleniumCSharpExample.Program.<Main>d__2.MoveNext() 於 C:\Users\Asus\source\repos\AutoSigner\AutoSigner\Program.cs: 行 87
+1124S2211: 操作失敗 --> System.IndexOutOfRangeException: 索引在陣列的界限之外。
+   於 SeleniumCSharpExample.Program.<Main>d__2.MoveNext() 於 C:\Users\Asus\source\repos\AutoSigner\AutoSigner\Program.cs: 行 87
