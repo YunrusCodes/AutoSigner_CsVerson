@@ -13,17 +13,34 @@ namespace SeleniumCSharpExample
 {
     class Program
     {
-        // 定義機器人的 Token
-        private const string BotToken = "MTE0MjQ2NjczNjc3NjU1MjYyNA.Giun5c.xUNMIEX1OjQDb2_DU4aEb8AUXl2DfUaBR0qYlA";
-
-        // 定義要發送訊息的頻道 ID
-        private const ulong ChannelId = 1125363520066830339;
-
         // 定義失敗訊息的格式
         private const string FailureMessageFormat = "操作失敗: {0}\n錯誤原因: {1}";
 
         static async Task Main(string[] args)
         {
+            string dir_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            string BotToken;
+            ulong ChannelId;
+            using (StreamReader f = new StreamReader(Path.Combine(dir_path, "DC_bot.txt")))
+            {
+                // 定義機器人的 Token
+                BotToken = f.ReadLine()?.Trim();
+
+                // 定義要發送訊息的頻道 ID
+                string line = f.ReadLine()?.Trim();
+                if (ulong.TryParse(line, out ChannelId))
+                {
+                    // 轉換成功，可以使用 ChannelId
+                }
+                else
+                {
+                    // 轉換失敗，提示用戶輸入不合法
+                    Console.WriteLine("請在 DC_bot.txt 文件中輸入有效的頻道 ID");
+                }
+            }
+
+
+
             // 建立一個 DiscordSocketClient 物件，用來連接和操作 DC 伺服器
             var client = new DiscordSocketClient();
 
@@ -47,7 +64,7 @@ namespace SeleniumCSharpExample
             await client.StartAsync();
 
             // 從文本文件中讀取_id和_pw變量的值
-            string dir_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+            dir_path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
             using (StreamReader f = new StreamReader(Path.Combine(dir_path, "credentials.txt")))
             {
                 while (true)
